@@ -1,14 +1,14 @@
 <template>
   <v-card>
-      <v-flex xs12 sm10>
-        <v-tree url="/item/category/list"
-                :isEdit="isEdit"
-                @handleAdd="handleAdd"
-                @handleEdit="handleEdit"
-                @handleDelete="handleDelete"
-                @handleClick="handleClick"
-        />
-      </v-flex>
+    <v-flex xs12 sm10>
+      <v-tree url="/item/category/list"
+              :isEdit="isEdit"
+              @handleAdd="handleAdd"
+              @handleEdit="handleEdit"
+              @handleDelete="handleDelete"
+              @handleClick="handleClick"
+      />
+    </v-flex>
   </v-card>
 </template>
 
@@ -17,20 +17,20 @@
     name: "category",
     data() {
       return {
-        isEdit:true
+        isEdit: true
       }
     },
     methods: {
       handleAdd(node) {
         console.log("add .... ");
         console.log(node);
-        this.$http.get("/item/category/add",{
-          params:{
-            id:node.id,
-            name:node.name,
-            parentId:node.parentId,
-            isParent:node.isParent,
-            sort:node.sort
+        this.$http.get("/item/category/add", {
+          params: {
+            id: node.id,
+            name: node.name,
+            parentId: node.parentId,
+            isParent: node.isParent,
+            sort: node.sort
           }
         }).then(resp => { // 这里使用箭头函数
           console.log(resp)
@@ -41,6 +41,16 @@
       },
       handleDelete(id) {
         console.log("delete ... " + id)
+
+        this.$http.get("/item/category/delete", {
+          params: {
+            id: id,
+          }
+        }).then(resp => { // 这里使用箭头函数
+          if (resp.status === '200') {
+            console.log("delete 1111")
+          }
+        })
       },
       handleClick(node) {
         console.log(node)
