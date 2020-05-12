@@ -5,7 +5,7 @@
       <!--搜索框，与search属性关联-->
       <v-spacer/>
       <v-flex xs3>
-      <v-text-field label="黄佳宝" v-model.lazy="search" append-icon="search" hide-details/>
+      <v-text-field label="请输入搜索关键字" v-model.lazy="search" append-icon="search" hide-details/>
       </v-flex>
     </v-card-title>
     <v-divider/>
@@ -126,7 +126,7 @@
       },
       editBrand(oldBrand){
         // 根据品牌信息查询商品分类
-        this.$http.get("/item/category/bid/" + oldBrand.id)
+        this.$http.get("/item/brand/edit/bid/" + oldBrand.id)
           .then(({data}) => {
             // 修改标记
             this.isEdit = true;
@@ -139,7 +139,7 @@
           })
       },
         deleteBrand(oldBrand){
-            this.$http.delete("/item/category/bid/" + oldBrand.id)
+            this.$http.delete("/item/brand/delete/bid/" + oldBrand.id)
         },
       closeWindow(){
         // 重新加载数据

@@ -33,22 +33,43 @@
             sort: node.sort
           }
         }).then(resp => { // 这里使用箭头函数
-          console.log(resp)
+          if (resp.status === 200) {
+            this.$message.success("新增节点成功！")
+          } else {
+            this.$message.success("新增节点失败！")
+
+          }
         })
       },
       handleEdit(id, name) {
         console.log("edit... id: " + id + ", name: " + name)
+        this.$http.get("/item/category/edit", {
+          params: {
+            id: id,
+            name: name
+          }
+        }).then(resp => {
+          if (resp.status === 200) {
+            this.$message.success("修改成功！")
+          } else {
+            this.$message.success("修改失败！")
+          }
+        });
+
+
       },
       handleDelete(id) {
-        console.log("delete ... " + id)
+        console.log("delete node ... " + id)
 
         this.$http.get("/item/category/delete", {
           params: {
             id: id,
           }
         }).then(resp => { // 这里使用箭头函数
-          if (resp.status === '200') {
-            console.log("delete 1111")
+          if (resp.status === 200) {
+            this.$message.success("删除节点成功！")
+          } else {
+            this.$message.success("删除节点失败！")
           }
         })
       },
